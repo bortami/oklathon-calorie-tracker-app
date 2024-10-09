@@ -14,4 +14,4 @@ The focus is on building a lightweight, intuitive app that can be expanded with 
 - [Firebase for user authentication, storage, and hosting](https://console.firebase.google.com/u/0/project/simple-calorie-tracker-b6f29/overview)
 - [CalorieNinja API for food database](https://calorieninjas.com/api)
 - Backend: [nodejs](https://nodejs.org/en/download/package-manager)
-- Frontend: Up for discussion
+- Frontend: Up for discussion - React or Vue or vanilla
