@@ -15,3 +15,4 @@ The focus is on building a lightweight, intuitive app that can be expanded with 
 - [CalorieNinja API for food database](https://calorieninjas.com/api)
 - Backend: [nodejs](https://nodejs.org/en/download/package-manager)
 - Frontend: Up for discussion - React or Vue or vanilla
+- [Inspo Screenshots](https://www.figma.com/design/hx4BOc4HsPBqPOvFQFtgNV/Calorie-Tracker-Inspo?node-id=0-1&t=EIw3QmXpEqanfJJC-1)
