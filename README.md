@@ -12,6 +12,10 @@ The focus is on building a lightweight, intuitive app that can be expanded with 
 
 ##Expected Stack and tools:
 - [Firebase for user authentication, storage, and hosting](https://console.firebase.google.com/u/0/project/simple-calorie-tracker-b6f29/overview)
+--Firebase Hosting: Run firebase emulators:start to emulate Hosting and your backend project resources at a locally hosted URL. 
+
+To view and share your changes at a temporary preview URL, run firebase hosting:channel:deploy to create and deploy to a preview channel. Set up the GitHub integration for easy iterations of your previewed content.
+
 - [CalorieNinja API for food database](https://calorieninjas.com/api)
 - Backend: [nodejs](https://nodejs.org/en/download/package-manager)
 - Frontend: React with Nextjs
