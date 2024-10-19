@@ -1,18 +1,41 @@
-import { columns } from "./columns";
-import { RadialChart } from "./components/calorieChart";
-import { FoodTable } from "./components/foodTable";
-import { DataTable } from "./data-table";
+'use client'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+import Link from 'next/link';
 
-export default function Home() {
-  let foods = [{foodName: "pizza",calories: "160"},{foodName: "sushi", calories: "200"}];
+const Home = () => {
   return (
-    <div className="items-center justify-items-center justify-center w-screen min-h-screen p-4 pb-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col row-start-2 justify-items-center items-center justify-center">
-        <div className="w-64">
-          <RadialChart></RadialChart>
-          <DataTable columns={columns} data={foods} />
+    <>
+      <div className="container relative h-screen flex-col items-center justify-center md:grid md:max-w-none md:grid-cols-2 lg:px-0">
+        <div className="relative hidden h-full flex-col bg-muted p-10 text-white md:flex lg:flex ">
+          <div className="absolute inset-0 bg-black" />
+          <div className="relative z-20 flex items-center text-lg font-medium text-white">
+            Oklathon Calorie Tracker
+          </div>
         </div>
-      </main>
-    </div>
+        <div className="p-2 mt-48 sm:mt-0 lg:p-8 w-screen md:w-full mx-auto">
+          <div className="mx-auto flex w-full flex-col justify-center space-y-6">
+            <div className="flex flex-col space-y-2 text-center">
+              <h1 className="text-2xl font-semibold tracking-tight">
+                Hi! Welcome to our Oklathon Calorie Tracker App
+              </h1>
+            </div>
+            <div className="grid gap-6 px-12">
+              <Button>
+                <Link href="/sign-in">Sign In</Link>
+              </Button>
+              <Button>
+              <Link href="/sign-up">Sign Up</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
   );
-}
+};
+
+export default Home;
