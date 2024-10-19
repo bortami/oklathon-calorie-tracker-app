@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { label: "dashboard", href: "/" },
+  { label: "dashboard", href: "/home" },
   { label: "food log", href: "/log" },
   { label: "profile", href: "/profile" },
 ];
@@ -78,7 +78,7 @@ export function Navbar() {
                 </button>
               </div>
             </div>
-            <nav className="h-[95%] flex flex-col items-center justify-between m-auto">
+            <nav className="h-[95%] flex flex-col items-center justify-between m-auto bg-black">
               <ul className="flex flex-col m-auto text-center animate-in">
                 {links.map((link) => (
                   <li className="px-4 py-2" key={link.href}>

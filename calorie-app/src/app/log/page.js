@@ -1,4 +1,5 @@
-"use client";
+'use client'
+
 import { SearchBar } from "../components/searchBar";
 import { useAuth } from "../context/authContext";
 import SignInPage from "../sign-in/page";

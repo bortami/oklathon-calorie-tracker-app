@@ -1,7 +1,10 @@
-"use client";
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+'use client'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from "../context/authContext";
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 const SignInPage = () => {
   const [email, setEmail] = useState("");
@@ -53,10 +56,10 @@ const SignInPage = () => {
               <form onSubmit={handleSubmit}>
                 <div className="grid gap-2">
                   <div className="grid gap-1">
-                    <h2 className="sr-only" htmlFor="email">
+                    <Label className="sr-only" htmlFor="email">
                       Email
-                    </h2>
-                    <input
+                    </Label>
+                    <Input
                       id="email"
                       placeholder="Email Address"
                       type="email"
@@ -67,19 +70,21 @@ const SignInPage = () => {
                     />
                   </div>
                   <div className="grid gap-1">
-                    <h2 className="sr-only" htmlFor="password">
+                    <Label className="sr-only" htmlFor="password">
                       Password
-                    </h2>
-                    <input
+                    </Label>
+                    <Input
                       id="password"
-                      placeholder="name@example.com"
+                      placeholder="Password"
                       type="password"
                       autoCapitalize="none"
                       autoCorrect="off"
                       onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
-                  <button>Sign In with Email</button>
+                  <Button >
+                    Sign In with Email
+                  </Button>
                 </div>
               </form>
             </div>
