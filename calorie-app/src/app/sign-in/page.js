@@ -1,18 +1,30 @@
-'use client'
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+"use client";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../context/authContext";
 
 const SignInPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
+
+  const { signIn } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      signIn()
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
       //await signIn(email,password, false);
-      //router.replace('/');
+      router.push("/");
     } catch (error) {
       //window.alert(error);
     }
@@ -51,7 +63,7 @@ const SignInPage = () => {
                       autoCapitalize="none"
                       autoComplete="email"
                       autoCorrect="off"
-                      onChange={(e) => setEmail(e.target.value)} 
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <div className="grid gap-1">
@@ -64,12 +76,10 @@ const SignInPage = () => {
                       type="password"
                       autoCapitalize="none"
                       autoCorrect="off"
-                      onChange={(e) => setPassword(e.target.value)} 
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
-                  <button >
-                    Sign In with Email
-                  </button>
+                  <button>Sign In with Email</button>
                 </div>
               </form>
             </div>
