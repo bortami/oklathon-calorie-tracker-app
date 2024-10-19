@@ -1,27 +1,83 @@
-export default function SignInPage() {
-    return (
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-        <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-          <div className="flex gap-4 items-center flex-col sm:flex-row">
-            <a
-              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-              href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Sign Up Page
-            </a>
-            <a
-              className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-              href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read our docs
-            </a>
+'use client'
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+const SignUpPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      //await signUp(email,password, false);
+      //router.replace('/');
+    } catch (error) {
+      //window.alert(error);
+    }
+  };
+
+  return (
+    <>
+      <div className="container relative hidden h-screen flex-col items-center justify-center md:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
+        <div className="relative hidden h-full flex-col bg-muted p-10 text-white lg:flex ">
+          <div className="absolute inset-0 bg-black" />
+          <div className="relative z-20 flex items-center text-lg font-medium text-white">
+            Oklathon Calorie Tracker
           </div>
-        </main>
+        </div>
+        <div className="lg:p-8">
+          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+            <div className="flex flex-col space-y-2 text-center">
+              <h1 className="text-2xl font-semibold tracking-tight">
+                Let's create your account!
+              </h1>
+              <p className="text-sm text-muted-foreground">
+                Enter your details below to create your account
+              </p>
+            </div>
+            <div className={"grid gap-6"}>
+              <form onSubmit={handleSubmit}>
+                <div className="grid gap-2">
+                  <div className="grid gap-1">
+                    <h2 className="sr-only" htmlFor="email">
+                      Email
+                    </h2>
+                    <input
+                      id="email"
+                      placeholder="Email Address"
+                      type="email"
+                      autoCapitalize="none"
+                      autoComplete="email"
+                      autoCorrect="off"
+                      onChange={(e) => setEmail(e.target.value)} 
+                    />
+                  </div>
+                  <div className="grid gap-1">
+                    <h2 className="sr-only" htmlFor="password">
+                      Password
+                    </h2>
+                    <input
+                      id="password"
+                      placeholder="name@example.com"
+                      type="password"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      onChange={(e) => setPassword(e.target.value)} 
+                    />
+                  </div>
+                  <button >
+                    Sign In with Email
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
-    );
-  }
-  
+    </>
+  );
+};
+
+export default SignUpPage;
