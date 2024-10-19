@@ -1,27 +1,56 @@
-export default function ProfilePage() {
+'use client'
+import { useState } from 'react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
+import { useAuth } from "../context/authContext";
+import SignInPage from "../sign-in/page";
+
+const ProfilePage = () => {
+  const { user, logOut } = useAuth();
+
+  if (user) {
+
+  const [calorieGoal, setCalorieGoal] = useState('');
+
     return (
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-        <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-          <div className="flex gap-4 items-center flex-col sm:flex-row">
-            <a
-              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-              href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Profile Page
-            </a>
-            <a
-              className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-              href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Read our docs
-            </a>
+          <>
+      <div className="container relative h-screen flex-col items-center justify-center lg:px-0">
+        <div className="p-2 mt-48 sm:mt-0 w-screen md:w-full mx-auto">
+          <div className="mx-auto flex w-96 flex-col justify-center space-y-6">
+            <div className="flex flex-col space-y-4 text-center">
+              <h1 className="text-2xl font-semibold tracking-tight">
+                Enter your desired calorie goal
+              </h1>
+            </div>
+            <div className="px-12">
+              <form onSubmit={handleSubmit}>
+                <div className="grid gap-2">
+                  <div className="grid gap-1">
+                    <Label className="sr-only" htmlFor="email">
+                      Calorie Goal
+                    </Label>
+                    <Input
+                      id="calories"
+                      placeholder="Calorie Goal"
+                      type="text"
+                      autoCapitalize="none"
+                      autoCorrect="off"
+                      onChange={(e) => setCalorieGoal(e.target.value)} 
+                    />
+                  </div>
+                  <Button>
+                    Submit
+                  </Button>
+                </div>
+              </form>
+            </div>
           </div>
-        </main>
+        </div>
       </div>
+    </>
     );
+  } else {
+    return <SignInPage />;
   }
-  
+}

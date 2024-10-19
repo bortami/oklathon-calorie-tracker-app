@@ -1,18 +1,33 @@
 'use client'
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from "../context/authContext";
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
 const SignInPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const router = useRouter();
+
+  const { signIn } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      signIn()
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+        });
       //await signIn(email,password, false);
-      //router.replace('/');
+      router.push("/");
     } catch (error) {
       //window.alert(error);
     }
@@ -41,35 +56,35 @@ const SignInPage = () => {
               <form onSubmit={handleSubmit}>
                 <div className="grid gap-2">
                   <div className="grid gap-1">
-                    <h2 className="sr-only" htmlFor="email">
+                    <Label className="sr-only" htmlFor="email">
                       Email
-                    </h2>
-                    <input
+                    </Label>
+                    <Input
                       id="email"
                       placeholder="Email Address"
                       type="email"
                       autoCapitalize="none"
                       autoComplete="email"
                       autoCorrect="off"
-                      onChange={(e) => setEmail(e.target.value)} 
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </div>
                   <div className="grid gap-1">
-                    <h2 className="sr-only" htmlFor="password">
+                    <Label className="sr-only" htmlFor="password">
                       Password
-                    </h2>
-                    <input
+                    </Label>
+                    <Input
                       id="password"
-                      placeholder="name@example.com"
+                      placeholder="Password"
                       type="password"
                       autoCapitalize="none"
                       autoCorrect="off"
-                      onChange={(e) => setPassword(e.target.value)} 
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </div>
-                  <button >
+                  <Button >
                     Sign In with Email
-                  </button>
+                  </Button>
                 </div>
               </form>
             </div>
