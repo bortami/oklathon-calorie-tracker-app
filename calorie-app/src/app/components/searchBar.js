@@ -1,16 +1,91 @@
-export function SearchBar(){
+'use client'
+import { useState } from 'react';
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+
+export function SearchBar() {
+    const [foodItem, setFoodItem] = useState('');
+    const [foodList, setFoodList] = useState([]);
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const axios = require('axios');
+
+        const apiKey = 'RN2x+V3YhTirpJM0ExxClQ==e1GElmIAUMseOMO5';
+        // const query = '12oz onion and a tomato';
+
+        axios.get('https://api.calorieninjas.com/v1/nutrition?query=' + foodItem, {
+            headers: {
+                'X-API-Key': apiKey
+            }
+        })
+            .then(response => {
+                let allFoodList = foodList;
+                const obj = response.data;
+                // console.log("Object keys are: ", Object.keys(obj));
+                // console.log(Object.keys(obj));
+                // console.log(obj.items[0]);
+                // console.log(obj.items[0]['name']);
+                // console.log(obj.items[0]['serving_size_g']);
+                // console.log(obj.items[0]['fat_total_g']);
+                // console.log(obj.items[0]['fat_saturated_g']);
+                // console.log(obj.items[0]['protein_g']);
+                // console.log(obj.items[0]['sodium_mg']);
+                // console.log(obj.items[0]['potassium_mg']);
+                // console.log(obj.items[0]['cholesterol_mg']);
+                // console.log(obj.items[0]['carbohydrates_total_g']);
+                // console.log(obj.items[0]['fiber_g']);
+                // console.log(obj.items[0]['sugar_g']);
+                obj.items.forEach(item => {
+                    console.log("Food item name is: ", item.name);
+                    allFoodList.push(item)
+                });
+                setFoodList([...foodList, allFoodList]);
+                console.log("Food list contains:", foodList);
+                // setFoodList(allFoodList);
+                // let totalCalories = 0.0, totalFat = 0.0, totalSaturatedFat = 0.0, totalProtein = 0.0, totalSodium = 0.0, totalPotassium = 0.0, totalCholesterol = 0.0, totalCarbohydrates = 0.0, totalFiber = 0.0, totalSugar = 0.0;
+                // for (let i = 0; i < obj.items.length; i++) {
+                //     console.log('name: ', obj.item[i]['name'])
+                //     totalCalories = totalCalories + obj.items[i]['calories'];
+                //     totalFat = totalFat + obj.items[i]['fat_total_g'];
+                //     totalSaturatedFat = totalSaturatedFat + obj.items[i]['fat_saturated_g']
+                //     totalProtein = totalProtein + obj.items[i]['protein_g'];
+                //     totalSodium = totalSodium + obj.items[i]['sodium_mg'];
+                //     totalPotassium = totalPotassium + obj.items[i]['potassium_mg'];
+                //     totalCholesterol = totalCholesterol + obj.items[i]['cholesterol_mg'];
+                //     totalCarbohydrates = totalCarbohydrates + obj.items[i]['carbohydrates_total_g'];
+                //     totalFiber = totalFiber + obj.items[i]['fiber_g'];
+                //     console.log('the total grams of sugar is:', obj.items[i]['sugar_g']);
+                //     totalSugar = totalSugar + obj.items[i]['sugar_g'];
+                //     console.log('\n');
+                // }
+
+            })
+            .catch(error => {
+                console.log('Errored')
+                console.error(error);
+            });
+    };
+
     return (
-        <form className="max-w-md mx-auto">   
-        <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
-        <div className="relative">
-            <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                <svg className="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
-                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
-                </svg>
+        <>
+            <div className="flex w-full max-w-sm items-center space-x-2">
+                <form onSubmit={handleSubmit}>
+                    <Input id="foodItem" type="foodItem" placeholder="" onChange={(e) => setFoodItem(e.target.value)} />
+                    <Button type="submit">Subscribe</Button>
+                </form>
             </div>
-            <input type="search" id="default-search" className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search Mockups, Logos..." required />
-            <button type="submit" className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
-        </div>
-        </form>
-    )
+
+            <div>
+                <h2> List goes here </h2>
+                <ul>
+                    <li> Test list item </li>
+                    {foodList.map((item, index) => (
+                        <li key={index}>{item.name}</li>
+                    ))}
+                </ul>
+            </div>
+        </>
+    );
 }
